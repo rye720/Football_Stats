@@ -1,14 +1,13 @@
-﻿using Core.Models;
+﻿using Domain.Models;
 using Infrastructure.Repository;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
+using System;
 
 namespace ConsoleApp1
 {
-    class Program
+    class UtilityConsole
     {
         static void Main(string[] args)
         {
@@ -34,11 +33,11 @@ namespace ConsoleApp1
 
             newPs.Add(np);
 
-            playerRepo.InsertPlayers(newPs);
+            Task.Run(() => playerRepo.InsertPlayersAsync(newPs));
 
-            var players = playerRepo.GetAllPlayers();
+            var players = playerRepo.GetAllPlayersAsync();
 
-            foreach (var x in players)
+            foreach (var x in players.Result)
             {
                 Console.WriteLine("-----------------------");
                 Console.WriteLine(x.full_name);
@@ -47,9 +46,11 @@ namespace ConsoleApp1
                 Console.WriteLine(x.RowID);
             }
 
-            
+            PlayersUpdater updater = new PlayersUpdater();
 
+            //Task.Run(() => updater.UpdatePlayers());
 
+            updater.UpdatePlayers();
         }
     }
 }

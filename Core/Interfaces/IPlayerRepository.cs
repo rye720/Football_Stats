@@ -1,15 +1,15 @@
-﻿using Core.Models;
+﻿using Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Interfaces
+namespace Domain.Interfaces
 {
     public interface IPlayerRepository
     {
-        IEnumerable<Player> GetAllPlayers();
-        Task InsertPlayers(IEnumerable<Player> players);
+        Task<IEnumerable<Player>> GetAllPlayersAsync();
+        Task InsertPlayersAsync(IEnumerable<Player> players);
     }
 }

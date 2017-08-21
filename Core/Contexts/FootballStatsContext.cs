@@ -1,4 +1,4 @@
-﻿using Core.Models;
+﻿using Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,7 +8,7 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Contexts
+namespace Domain.Contexts
 {
     public partial class FootballStatsContext : DbContext
     {

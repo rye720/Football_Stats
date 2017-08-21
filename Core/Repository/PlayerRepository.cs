@@ -1,24 +1,29 @@
-﻿using Core.Contexts;
-using Core.Models;
-using Infrastructure.Interfaces;
+﻿using Domain.Contexts;
+using Domain.Models;
+using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Domain.Repository;
+using System.Data.Entity;
 
 namespace Infrastructure.Repository
 {
     public class PlayerRepository : BaseRepository, IPlayerRepository
     {
 
-        public IEnumerable<Player> GetAllPlayers()
+        public async Task<IEnumerable<Player>> GetAllPlayersAsync()
         {
-            var context = DbContext();
-            return context.Player.ToList();
+            using (var context = DbContext())
+            {
+                var x = await context.Player.ToListAsync();
+                return x;
+            }
         }
 
-        public async Task InsertPlayers(IEnumerable<Player> players)
+        public async Task InsertPlayersAsync(IEnumerable<Player> players)
         {
             using (var context = DbContext())
             {
