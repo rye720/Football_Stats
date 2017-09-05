@@ -18,16 +18,29 @@ namespace Infrastructure.Repository
         {
             using (var context = DbContext())
             {
-                var x = await context.Player.ToListAsync();
-                return x;
+                return await context.Player.ToListAsync();
             }
         }
 
+        // savechangesasync not working??
         public async Task InsertPlayersAsync(IEnumerable<Player> players)
         {
             using (var context = DbContext())
             {
-                context.Player.AddRange(players);
+                foreach(var p in players)
+                {
+                    context.Player.Add(p);
+                }
+
+                context.SaveChanges();
+            }
+        }
+
+        public async Task InsertPlayerAsync(Player player)
+        {
+            using (var context = DbContext())
+            {
+                context.Player.Add(player);
                 await context.SaveChangesAsync();
             }
         }

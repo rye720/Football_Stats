@@ -29,6 +29,11 @@ namespace Infrastructure.Repository
 
             var playersList = playersDict.Values.ToList();
 
+            //foreach (var p in playersList)
+            //{
+            //    await _playerRepo.InsertPlayerAsync(p);
+            //}
+
             await _playerRepo.InsertPlayersAsync(playersList);
         }
     }

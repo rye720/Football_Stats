@@ -11,7 +11,7 @@ namespace Domain.Repository
     {
         //magic connection string for now
 
-        private static string connectionString = "Data Source=RY3SBABY;Initial Catalog=FootballStatsProj;Integrated Security=True";
+        private static string connectionString = @"Data Source=RY3SBABY;Integrated Security=True;Initial Catalog=FootballStatsProj;";
 
         protected FootballStatsContext DbContext()
         {

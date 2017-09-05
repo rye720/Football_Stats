@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Models
 {
+    [Serializable]
     public sealed class Player
     {
+        [Key]
         public int RowID { get; set; }
 
         public string birthdate { get; set; }
