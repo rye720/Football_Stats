@@ -15,7 +15,6 @@ namespace Infrastructure.Repository
 
         public PlayersUpdater()
         {
-            //configure unity at some point
             _jsonHelper = new JSONHelper();
             _playerRepo = new PlayerRepository();
         }
@@ -27,14 +26,17 @@ namespace Infrastructure.Repository
 
             var playersDict = JsonConvert.DeserializeObject<Dictionary<string, Player>>(json);
 
-            var playersList = playersDict.Values.ToList();
+            var existingPlayersDict = _playerRepo.GetAllPlayersDictionaryAsync();
 
-            //foreach (var p in playersList)
-            //{
-            //    await _playerRepo.InsertPlayerAsync(p);
-            //}
+            //this will insert new players
 
-            await _playerRepo.InsertPlayersAsync(playersList);
+            foreach (var p in playersDict)
+            {
+                if (!existingPlayersDict.Result.ContainsKey(p.Key))
+                {
+                    _playerRepo.InsertPlayerAsync(p.Value);
+                }
+            }
         }
     }
 }

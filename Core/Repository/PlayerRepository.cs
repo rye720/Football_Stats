@@ -11,6 +11,9 @@ using System.Data.Entity;
 
 namespace Infrastructure.Repository
 {
+
+    // not running async yet, set it up proper later
+
     public class PlayerRepository : BaseRepository, IPlayerRepository
     {
 
@@ -22,7 +25,14 @@ namespace Infrastructure.Repository
             }
         }
 
-        // savechangesasync not working??
+        public async Task<Dictionary<string, Player>> GetAllPlayersDictionaryAsync()
+        {
+            using (var context = DbContext())
+            {
+                return await context.Player.ToDictionaryAsync(k => k.gsis_id, k => k);
+            }
+        }
+
         public async Task InsertPlayersAsync(IEnumerable<Player> players)
         {
             using (var context = DbContext())
@@ -31,7 +41,6 @@ namespace Infrastructure.Repository
                 {
                     context.Player.Add(p);
                 }
-
                 context.SaveChanges();
             }
         }
@@ -41,7 +50,7 @@ namespace Infrastructure.Repository
             using (var context = DbContext())
             {
                 context.Player.Add(player);
-                await context.SaveChangesAsync();
+                context.SaveChanges();
             }
         }
     }

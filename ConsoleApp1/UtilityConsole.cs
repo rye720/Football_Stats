@@ -50,16 +50,16 @@ namespace ConsoleApp1
 
             //Task.Run(() => playerRepo.InsertPlayersAsync(newPs));
 
-            var players = playerRepo.GetAllPlayersAsync();
+            //var players = playerRepo.GetAllPlayersAsync();
 
-            foreach (var x in players.Result)
-            {
-                Console.WriteLine("-----------------------");
-                Console.WriteLine(x.full_name);
-                Console.WriteLine(x.college);
-                Console.WriteLine(x.profile_url);
-                Console.WriteLine(x.RowID);
-            }
+            //foreach (var x in players.Result)
+            //{
+            //    Console.WriteLine("-----------------------");
+            //    Console.WriteLine(x.full_name);
+            //    Console.WriteLine(x.college);
+            //    Console.WriteLine(x.profile_url);
+            //    Console.WriteLine(x.RowID);
+            //}
 
             PlayersUpdater updater = new PlayersUpdater();
 

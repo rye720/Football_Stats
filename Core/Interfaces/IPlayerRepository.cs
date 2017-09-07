@@ -10,6 +10,7 @@ namespace Domain.Interfaces
     public interface IPlayerRepository
     {
         Task<IEnumerable<Player>> GetAllPlayersAsync();
+        Task<Dictionary<string, Player>> GetAllPlayersDictionaryAsync();
         Task InsertPlayersAsync(IEnumerable<Player> players);
     }
 }

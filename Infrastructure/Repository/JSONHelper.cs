@@ -11,11 +11,11 @@ namespace Infrastructure.Repository
     public class JSONHelper
     {
 
-        public string GetPlayerJSONFromURL(string url)
+        public string GetPlayerJSONFromURL(string jsonUrl)
         {
             using (WebClient wc = new WebClient())
             {
-                var json = wc.DownloadString(url);
+                var json = wc.DownloadString(jsonUrl);
                 return json;
             }
         }
