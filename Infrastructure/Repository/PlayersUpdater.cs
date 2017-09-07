@@ -26,17 +26,17 @@ namespace Infrastructure.Repository
 
             var playersDict = JsonConvert.DeserializeObject<Dictionary<string, Player>>(json);
 
-            var existingPlayersDict = _playerRepo.GetAllPlayersDictionaryAsync();
+            var existingPlayersDict = await _playerRepo.GetAllPlayersDictionaryAsync();
 
             //this will insert new players
-
             foreach (var p in playersDict)
             {
-                if (!existingPlayersDict.Result.ContainsKey(p.Key))
+                if (!existingPlayersDict.ContainsKey(p.Key))
                 {
-                    _playerRepo.InsertPlayerAsync(p.Value);
+                    await _playerRepo.InsertPlayerAsync(p.Value);
                 }
             }
         }
+
     }
 }

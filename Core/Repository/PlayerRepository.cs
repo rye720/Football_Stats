@@ -12,8 +12,6 @@ using System.Data.Entity;
 namespace Infrastructure.Repository
 {
 
-    // not running async yet, set it up proper later
-
     public class PlayerRepository : BaseRepository, IPlayerRepository
     {
 
@@ -37,11 +35,11 @@ namespace Infrastructure.Repository
         {
             using (var context = DbContext())
             {
-                foreach(var p in players)
+                foreach (var p in players)
                 {
                     context.Player.Add(p);
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
 
@@ -50,7 +48,7 @@ namespace Infrastructure.Repository
             using (var context = DbContext())
             {
                 context.Player.Add(player);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
     }
